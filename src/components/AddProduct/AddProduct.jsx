@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./AddProduct.css"
 import upload_area from "../../assets/upload_area.svg"
 import axios from "axios";
+import { uploadFile } from '../../helper/uploadFile';
 
 const AddProduct = () => {
   const [image,setImage] = useState(false);
@@ -21,17 +22,10 @@ const AddProduct = () => {
   }
 
   const addProduct = async ()=>{
-    console.log(productDetails);
-    let responseData;
     let product = productDetails;
-    let formData = new FormData();
-    formData.append('product',image);
-    const response = await axios.post("http://localhost:4000/upload",formData,{
-      Accept: 'application/json',
-    });
-    responseData = response.data;
-    if(responseData.success){
-      product.image = responseData.image_url;
+    const imageUrl = await uploadFile(image)
+    console.log(imageUrl.url)
+      product.image = imageUrl.url;
       console.log(product);
       let resp = await axios.post("http://localhost:4000/addproduct",product,{
         Accept: 'application/json',
@@ -43,7 +37,6 @@ const AddProduct = () => {
       else{
         alert("failed");
       }
-    }
   }
   return (
     <div className='add-product'>
