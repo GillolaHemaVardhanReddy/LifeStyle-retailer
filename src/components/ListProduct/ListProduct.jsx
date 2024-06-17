@@ -7,7 +7,7 @@ const ListProduct = () => {
   const [allproducts,setAllProducts] = useState([]);
 
   const fetchInfo = async ()=>{
-    const resp = await axios("http://localhost:4000/allproducts");
+    const resp = await axios("https://lifestyle-server-n4sv.onrender.com/allproducts");
     setAllProducts(resp.data);
   }
   useEffect(()=>{
@@ -15,7 +15,7 @@ const ListProduct = () => {
   },[]);
 
   const removeproduct = async (e)=>{
-    const resp = await axios.post("http://localhost:4000/removeproduct",{
+    const resp = await axios.post("https://lifestyle-server-n4sv.onrender.com/removeproduct",{
       id: e.id,
       name: e.name
     },{

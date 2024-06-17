@@ -27,7 +27,7 @@ const AddProduct = () => {
     console.log(imageUrl.url)
       product.image = imageUrl.url;
       console.log(product);
-      let resp = await axios.post("http://localhost:4000/addproduct",product,{
+      let resp = await axios.post("https://lifestyle-server-n4sv.onrender.com/addproduct",product,{
         Accept: 'application/json',
         'content-type': 'application/json'
       });
